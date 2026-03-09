@@ -5,6 +5,10 @@ from app.core.security import hash_password, verify_password
 
 def create_user(db: Session, user: UserCreate):
 
+    existing_user = db.query(User).filter(User.email == user.email).first()
+    if existing_user:
+        return None
+
     hashed_pw = hash_password(user.password)
 
     db_user = User(

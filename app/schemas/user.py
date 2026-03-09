@@ -15,4 +15,4 @@ class UserResponse(BaseModel):
     username: str
 
     class Config:
-        orm_model=True               #This tells Pydantic:"You may receive a SQLAlchemy object instead of a dictionary."
+        from_attributes = True               #This tells Pydantic:"You may receive a SQLAlchemy object instead of a dictionary."
