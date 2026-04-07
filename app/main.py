@@ -3,9 +3,9 @@ from fastapi import FastAPI
 from app.db.base import Base
 from app.db.session import engine
 from app.models import user
-from app.api.routes import auth
-from app.api.routes import users
-from app.api.routes import items
+from app.api.v1 import auth
+from app.api.v1 import users
+from app.api.v1 import items
 
 app = FastAPI(title="Lost and Found")
 
