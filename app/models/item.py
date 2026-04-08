@@ -8,14 +8,18 @@ class Item(Base):
 
     id = Column(Integer, primary_key=True, index=True)
 
-    title = Column(String, nullable=False, index=True)
+    name = Column(String, nullable=False, index=True)
     description = Column(Text)
 
     category = Column(String, index=True)
     location = Column(String, index=True)
 
-    status = Column(String, nullable=False, index=True)  # "lost" or "found"
+    type = Column(String, nullable=False, index=True)    # lost / found
+    status = Column(String, nullable=False, index=True)  # open / claimed / returned
 
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    owner = relationship("User")
+    owner = relationship("User", backref="items")
+
+    organization_id = Column(Integer, ForeignKey("organizations.id"))
+    
     created_at = Column(DateTime(timezone=True), server_default=func.now())
