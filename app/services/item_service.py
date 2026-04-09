@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from app.models.item import Item
 
 VALID_TYPES = ["lost", "found"]
@@ -36,9 +37,11 @@ def get_items(db: Session,
               skip: int=0, 
               limit: int=10, 
               type: str = None,
-              search=None, 
-              category=None, 
-              location=None):
+              search: str = None, 
+              category: str = None, 
+              location: str = None,
+              status: str = None
+):
     
     query = db.query(Item).filter(
         Item.organization_id == user.organization_id
@@ -46,6 +49,9 @@ def get_items(db: Session,
 
     if type:
         query = query.filter(Item.type == type)
+
+    if status:
+        query = query.filter(Item.status == status)
 
     if search:
         query = query.filter(Item.title.ilike(f"%{search}%"))

@@ -45,6 +45,7 @@ def list_items(
     search: str = None,
     category: str = None,
     location: str = None,
+    status: str = None,
     skip: int = 0,
     limit: int = 10,
     db: Session = Depends(get_db),
@@ -58,7 +59,8 @@ def list_items(
         type=type,
         search=search,
         category=category,
-        location=location
+        location=location,
+        status=status
     )
 
 
