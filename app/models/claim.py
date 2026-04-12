@@ -14,5 +14,5 @@ class Claim(Base):
 
     status = Column(String, default="pending")   # pending / accepted / rejected
 
-    item = relationship("Items")
-    user = relationship("Users")
+    item = relationship("Item")
+    user = relationship("User")

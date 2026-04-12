@@ -12,7 +12,11 @@ router = APIRouter(prefix="/auth", tags=["Auth"])
 
 @router.post("/register", response_model=UserResponse)
 def register(user: UserCreate, db: Session = Depends(get_db)):
-    new_user = create_user(db, user)
+    try:
+        new_user = create_user(db, user)
+    except Exception as exc:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(exc))
 
     if not new_user:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -23,13 +27,16 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
 def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)):
-    user = authenticate_user(db, form_data.username, form_data.password)
+    try:
+        user = authenticate_user(db, form_data.username, form_data.password)
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
 
     if not user:
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
     access_token = create_access_token(
-        data={"sub": str(user.id)}
+        data={"sub": str(user.id), "user_id": user.id}
     )
 
     return {

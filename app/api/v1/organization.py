@@ -8,4 +8,4 @@ router = APIRouter(prefix="/organizations", tags=["Organizations"])
 
 @router.post("/")
 def create_org(data: OrganizationCreate, db: Session = Depends(get_db)):
-    return create_organization(db, db.name)
+    return create_organization(db, data.name)

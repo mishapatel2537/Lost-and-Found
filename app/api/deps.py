@@ -19,7 +19,7 @@ def get_current_user(
             detail="Invalid authentication"
         )
     
-    user_id = payload.get("user_id")
+    user_id = payload.get("user_id") or payload.get("sub")
 
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
