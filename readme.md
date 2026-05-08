@@ -230,4 +230,4 @@ Focused on clean architecture, real-world features, and production-ready pattern
 
 ---
 
-use it, learn from it, improve it.
+Use it, learn from it, improve it.
