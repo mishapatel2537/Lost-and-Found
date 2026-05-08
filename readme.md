@@ -71,7 +71,8 @@ lost_and_found/
 │   │
 │   ├── db/
 │   │   ├── base.py              # SQLAlchemy base + model imports
-│   │   └── session.py           # DB engine & session
+│   │   ├── session.py           # DB engine & session
+|   |   └──init_dp.py 
 │   │
 │   ├── models/                  # Database tables
 │   ├── schemas/                 # Pydantic request/response models
@@ -223,13 +224,11 @@ DELETE /admin/items/{id}        → [Admin] Remove item
 
 ## 👤 Author
 
-Built by **[Your Name]** as a backend portfolio project.  
+Built by **MISHA** as a backend portfolio project.  
 Focused on clean architecture, real-world features, and production-ready patterns.
 
 > *"I built the backend for finding lost things. Ironically, I now know exactly where everything is."*
 
 ---
 
-## 📄 License
-
-MIT — use it, learn from it, improve it.
+use it, learn from it, improve it.
