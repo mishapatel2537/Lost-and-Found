@@ -202,12 +202,11 @@ DELETE /admin/items/{id}        → [Admin] Remove item
 
 ## 🛡️ Security
 
-- Passwords hashed with **bcrypt**
-- Authentication via **JWT Bearer tokens**
-- Organization isolation — users can only see items within their org
-- Role-based access — admin endpoints reject non-admin users with `403`
-- Rate limiting middleware ready to configure
-- Secrets stored in `.env`, never hardcoded
+- Secure user authentication with JWT Bearer tokens
+- Password hashing using bcrypt
+- Organization-based data isolation for standard users
+- Role-based admin access control
+- Configurable secrets through `.env`
 
 ---
 
