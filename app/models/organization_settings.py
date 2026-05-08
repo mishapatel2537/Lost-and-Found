@@ -10,4 +10,4 @@ class OrganizationSettings(Base):
     require_proof = Column(Boolean, default=True)
     max_claims_per_item = Column(Integer, default=3)
     enable_chat = Column(Boolean, default=True)
-    enable_mathcing = Column(Boolean, default=True)
+    enable_matching = Column("enable_mathcing", Boolean, default=True)

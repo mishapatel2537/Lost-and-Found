@@ -1,8 +1,8 @@
+from sqlalchemy import or_
 from sqlalchemy.orm import Session
 from app.models.user import User
 from app.schemas.user import UserCreate
 from app.core.security import hash_password, verify_password
-from app.models.organization import Organization
 from app.services.invite_service import validate_invite_code
 
 def create_user(db: Session, user: UserCreate):
@@ -35,9 +35,11 @@ def create_user(db: Session, user: UserCreate):
 
     return db_user
 
-def authenticate_user(db: Session, email:str, password:str):
+def authenticate_user(db: Session, identifier: str, password: str):
 
-    user = db.query(User).filter(User.email == email).first()
+    user = db.query(User).filter(
+        or_(User.email == identifier, User.username == identifier)
+    ).first()
 
     if not user:
         raise  Exception("Invalid User")

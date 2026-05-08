@@ -8,3 +8,4 @@ from app.models.claim import Claim
 from app.models.organization import Organization
 from app.models.organization_settings import OrganizationSettings
 from app.models.invite_code import InviteCode
+from app.models.notification import Notification

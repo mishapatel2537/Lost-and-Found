@@ -1,4 +1,5 @@
 from pydantic import BaseModel, EmailStr
+from typing import Optional
 
 class UserCreate(BaseModel):
     email: EmailStr
@@ -14,6 +15,8 @@ class UserResponse(BaseModel):
     id: int
     email: EmailStr
     username: str
+    role: str
+    organization_id: Optional[int]
 
     class Config:
-        from_attributes = True               #This tells Pydantic:"You may receive a SQLAlchemy object instead of a dictionary."
+        from_attributes = True

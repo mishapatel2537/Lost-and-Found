@@ -1,3 +1,4 @@
+from fastapi import Form
 from pydantic import BaseModel
 from typing import Optional
 
@@ -7,6 +8,23 @@ class ItemCreate(BaseModel):
     description: Optional[str]
     category: Optional[str] 
     type: str
+
+    @classmethod
+    def as_form(
+        cls,
+        name: str = Form(...),
+        location: Optional[str] = Form(None),
+        description: Optional[str] = Form(None),
+        category: Optional[str] = Form(None),
+        type: str = Form(...),
+    ):
+        return cls(
+            name=name,
+            location=location,
+            description=description,
+            category=category,
+            type=type,
+        )
 
 class ItemUpdateStatus(BaseModel):
     status: str

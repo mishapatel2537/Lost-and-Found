@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app.schemas.user import UserCreate, UserResponse, UserLogin
+from app.schemas.user import UserCreate, UserResponse
 from app.services.user_service import create_user, authenticate_user
 from app.core.security import create_access_token
 from app.db.session import get_db
@@ -28,6 +28,8 @@ def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     db: Session = Depends(get_db)):
     try:
+        # OAuth2PasswordRequestForm uses a "username" field, so we accept
+        # either the user's email or username in that field.
         user = authenticate_user(db, form_data.username, form_data.password)
     except Exception:
         raise HTTPException(status_code=401, detail="Invalid credentials")
